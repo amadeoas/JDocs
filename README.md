@@ -5,6 +5,9 @@ This UI provides access to the Javadoc of some libraries, see image below.
 
 The UI provides a list of some Javadocs and give access to view them through the UI.
 
+### Usage ###
+To see the home page of the UI go to the corresponding URL to see the Java libraries available and their corresponding Javadocs, i.e. for URL http://localhost:8080/. If the UI is running in your computer open the web browser and go to *http://localhost:8080*.
+
 ### Development
 To add a new Javadoc of a Library to the UI, e.g. **maven-javadoc-plugin-2.8.1-javadoc.jar**:
 - <u>unzip</u> the corresponding JAR file into the directory appropriate directory, directory format: 
