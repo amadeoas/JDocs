@@ -17,7 +17,7 @@ Where &lt;lib_name&gt; refers to the name of the library, e.g. **maven-javadoc-p
 
 This UI is a Spring Boot application that may be run by itself if the host computer have JRE installed and can be run with the below command.
 
-<div class="warning" style='padding:0.1em; background-color:lightgrey; color:darkblue'>
+<div class="warning" style='padding:0.1em; background-color:lightgrey; color:darkblue border:1px solid #555; display: block; margin-left: auto; margin-right: auto;'>
 <span>
 	<p style='margin-top:1em; text-align:left'><b>Command</b>:</p>
 	<hr />
@@ -25,7 +25,7 @@ This UI is a Spring Boot application that may be run by itself if the host compu
 </span>
 </div>
 <p></p>
-<div class="warning" style='padding:0.1em; background-color:lightgrey; color:darkblue'>
+<div class="warning" style='padding:0.1em; background-color:lightgrey; color:darkblue; border:1px solid #555; display: block; margin-left: auto; margin-right: auto;'>
 <span>
 	<p style='margin-top:1em; text-align:left'><b>Example</b>:</p>
 	<hr />
