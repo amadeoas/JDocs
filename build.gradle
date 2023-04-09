@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'co.uk.bocaditos'
-version = '1.0.1'
+version = '1.0.001'
 sourceCompatibility = '1.8'
 
 repositories {
