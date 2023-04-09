@@ -1,4 +1,4 @@
-# Libraries Javadoc
+# UI Javadoc for Libraries
 This UI provides access to the Javadoc of some libraries, see image below.
 
 <img src="index.png" alt= “Home Page” width="30%" height="30%" style='border:1px solid #555; display: block; margin-left: auto; margin-right: auto;' />
