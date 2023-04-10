@@ -55,6 +55,11 @@ public class JavadocController {
 
     	return url;
     }
+
+    @GetMapping({"/licence"})
+    public String lice(final Model model) {
+        return "licence";
+    }
     
     static boolean notNull(final String str) {
     	return (str != null && !str.isEmpty());

@@ -8,8 +8,13 @@
 		<link rel="stylesheet" href="static/main.css">
 	</head>
 	<body>
-		<h1>Something when wrong!</h1>
-		<h2>We are lookning into it.</h2>
-		<a href="/">Go Home</a>
+		<h1 style="text-align: center;">Something when wrong!</h1>
+		<h2 style="text-align: center;">We are lookning into it.</h2>
+		<br />
+		<br />
+
+		<span style="background-color:#ffffff; position: fixed; bottom: 0; width: 100%; border-top: solid #B8B6B6;">
+			<p><a href="/">Home</a> <a href="/licence">Licence</a></p>
+		</span>
 	</body>
 </html>

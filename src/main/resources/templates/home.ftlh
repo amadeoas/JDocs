@@ -19,5 +19,8 @@
 			</ul>
 		</details>
 </#list>
+		<span style="background-color:#ffffff; position: fixed; bottom: 0; width: 100%; border-top: solid #B8B6B6;">
+			<p><span style="color:#C8C6C6">Home</span> <a href="/licence">Licence</a></p>
+		</span>
 	</body>
 </html>

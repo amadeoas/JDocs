@@ -8,7 +8,10 @@
 		<link rel="stylesheet" href="static/main.css">
 	</head>
 	<body>
-		<h1>Sorry, we could not find the specified page.</h1>
-		<a href="/">Go Home</a>
+		<h1 style="text-align: center;">Sorry, we could not find the specified page.</h1>
+
+		<span style="background-color:#ffffff; position: fixed; bottom: 0; width: 100%; border-top: solid #B8B6B6;">
+			<p><a href="/">Home</a> <a href="/licence">Licence</a></p>
+		</span>
 	</body>
 </html>
