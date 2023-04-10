@@ -15,7 +15,8 @@
     </#list>
 			</ul>
 		</div>
-		<hr />
-		<a href="${route}/">Home</a>
+		<span style="background-color:#ffffff; position: fixed; bottom: 0; width: 100%; border-top: solid #B8B6B6;">
+			<p><a href="/">Home</a> <a href="/licence">Licence</a></p>
+		</span>
 	</body>
 </html>
