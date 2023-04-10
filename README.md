@@ -8,15 +8,13 @@ The UI provides a list of some Javadocs and give access to view them through the
 ### Usage ###
 To see the home page of the UI go to the corresponding URL to see the Java libraries available and their corresponding Javadocs, i.e. for URL http://localhost:8080/. If the UI is running in your computer open the web browser and go to *http://localhost:8080*.
 
-### Development
-To add a new Javadoc of a Library to the UI, e.g. **maven-javadoc-plugin-2.8.1-javadoc.jar**:
-- <u>unzip</u> the corresponding JAR file into the directory appropriate directory, directory format: 
-*src/main/resources/static/javadoc/&lt;lib_name&gt;/&lt;lib_version&gt;*.
-Where &lt;lib_name&gt; refers to the name of the library, e.g. **maven-javadoc-plugin**, and &lt;lib_version&gt; to its version, e.g. **2.8.1**.
-- <u>test</u> it
-- <u>commit</u> it to repository
-- <u>build</u>
-- <u>deploy</u>
+### Development ###
+To add a new Javadoc of a Library to the UI, where javadoc filename should follow the format &lt;lib_name&gt;-&lt;version&lt;-javadoc.jar, e.g. **maven-javadoc-plugin-2.8.1-javadoc.jar** where &lt;lib_name&gt; is **maven-javadoc-plugi** and &lt;version&gt; is **2.8.1** execute the following steps:
+- add the file into the directory of JDoc project src/main/resources/static/javadoc
+- run all <u>JUni</u> tests
+	- The test should faild on checkJavadoc1 and checkJavadoc2 but it is just to let you know that the new javadoc JAR files have been installed
+	- Run again the <u>JUni</u> tests, which should all pass
+- <u>commit</u> new installed javadocs to the repository
 
 This UI is a Spring Boot application that may be run by itself if the host computer have JRE installed and can be run with the below command.
 

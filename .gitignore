@@ -37,3 +37,4 @@ out/
 
 app.log
 src/main/resources/META-INF/
+src/main/resources/static/javadoc/*.jar
