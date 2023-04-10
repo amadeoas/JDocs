@@ -9,10 +9,10 @@ The UI provides a list of some Javadocs and give access to view them through the
 To see the home page of the UI go to the corresponding URL to see the Java libraries available and their corresponding Javadocs, i.e. for URL http://localhost:8080/. If the UI is running in your computer open the web browser and go to *http://localhost:8080*.
 
 ### Development ###
-To add a new Javadoc of a Library to the UI, where javadoc filename should follow the format &lt;lib_name&gt;-&lt;version&lt;-javadoc.jar, e.g. **maven-javadoc-plugin-2.8.1-javadoc.jar** where &lt;lib_name&gt; is **maven-javadoc-plugi** and &lt;version&gt; is **2.8.1** execute the following steps:
-- add the file into the directory of JDoc project src/main/resources/static/javadoc
+To add a new Javadoc of a library to the UI, where javadoc filename should follow the format &lt;lib_name&gt;-&lt;version&lt;-javadoc.jar, e.g. **maven-javadoc-plugin-2.8.1-javadoc.jar** where &lt;lib_name&gt; is **maven-javadoc-plugi** and &lt;version&gt; is **2.8.1**, execute the following steps:
+- add the <u>javadoc JAR</u> file into the directory of JDoc project src/main/resources/static/javadoc
 - run all <u>JUni</u> tests
-	- The test should faild on checkJavadoc1 and checkJavadoc2 but it is just to let you know that the new javadoc JAR files have been installed
+	- The test should faild on checkJavadoc1 and checkJavadoc2, which it is just to let you know that the new javadoc JAR files have been installed
 	- Run again the <u>JUni</u> tests, which should all pass
 - <u>commit</u> new installed javadocs to the repository
 
