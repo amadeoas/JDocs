@@ -110,7 +110,7 @@ public class JavadocControllerTest {
 				assertTrue("Failed to create directory " + destDir.getAbsolutePath(), destDir.mkdir());
 			}
 			destDir = new File(destDir, version);
-			if (!destDir.exists()) {
+			if (destDir.exists()) {
 				errors.append("Directory ")
 					.append(destDir.getAbsolutePath())
 					.append(" already exist\n");
@@ -146,7 +146,7 @@ public class JavadocControllerTest {
 				boolean notFound = true;
 
 				while (++lineNum < lines.size()) {
-					String line = lines.get(lineNum);
+					String line = lines.get(lineNum).toLowerCase();
 
 					if (line.startsWith(UPDATE_FRAME_BASE)) {
 						// Already set up
