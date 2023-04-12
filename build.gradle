@@ -22,6 +22,8 @@ configurations {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using.devtools
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
     
     implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
 	implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
