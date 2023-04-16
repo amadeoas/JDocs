@@ -26,6 +26,10 @@ import org.springframework.util.ResourceUtils;
 public class JavaDocMap extends TreeMap<JavaDocMap.StringName, Set<String>> {
 
 	private static final Logger logger = LogManager.getLogger(JavaDocMap.class);
+	
+	private final String docPath;
+	private final String repository;
+	private final String group;
 
 
 	/**
@@ -46,10 +50,39 @@ public class JavaDocMap extends TreeMap<JavaDocMap.StringName, Set<String>> {
 			this.name = name;
 		}
 
-		public String getName() {
+		public final String getName() {
 			return this.name;
 		}
 		
+		public final String getDocPath() {
+			return JavaDocMap.this.docPath;
+		}
+		
+		public final String getRepository() {
+			return JavaDocMap.this.repository;
+		}
+
+		public final String getGroup() {
+			return JavaDocMap.this.group;
+		}
+		
+		public final String getApiDoc() {
+			final String apiTitle = update(getTitle(), " Model");
+
+			return getDocPath() + "/" + update(apiTitle, " Library").replace(" ", "+");
+		}
+
+		public final String getLibDoc() {
+			 String libTitle = getTitle();
+			 int offset = libTitle.indexOf(" Library");
+
+			 if (offset == -1) {
+				 libTitle += "+Library";
+			 }
+
+			 return getDocPath() + "/" + libTitle.replace(" ", "+");
+		}
+
 		public String getTitle() {
 	    	String[] parts = name.split("-");
 	    	final StringBuilder buf;
@@ -104,17 +137,34 @@ public class JavaDocMap extends TreeMap<JavaDocMap.StringName, Set<String>> {
 		public int compareTo(final StringName name) {
 			return this.name.compareTo(name.name);
 		}
+		
+		private String update(String value, final String word) {
+			int offset = value.indexOf(word);
+
+			if (offset != -1) {
+				value = value.substring(0, offset) + value.substring(offset + word.length());
+			}
+
+			return value;
+		}
 
 	} // end class StringName
 
 
-	public JavaDocMap() {
+	public JavaDocMap(final String docPath, final String repository, final String group) {
+		this.docPath = docPath;
+		this.repository = repository;
+		this.group = group;
 		loadDirs();
 //		final File[] files = getResourceFolderFiles(f -> f.isDirectory(), "./static/javadoc");
 //
 //		for (final File file : files) {
 //			update(file);
 //		}
+	}
+
+	public final String getDocPath() {
+		return this.docPath;
 	}
 	
 	public final Set<String> get(final String name) {

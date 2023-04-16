@@ -16,7 +16,7 @@ public class JavadocServiceTest {
 	@Test
 	public void test() {
 		final String route = "http://localhost:8080";
-		final JavadocService service = new JavadocService(route);
+		final JavadocService service = new JavadocService(route, null, null, null);
 
 		assertNotNull(service.getDocs());
 		assertEquals(route, service.getRoute());

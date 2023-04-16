@@ -16,9 +16,12 @@ public class JavadocService {
 	private final JavaDocMap docs;
 
 
-	public JavadocService(@Value("${jdocs.route}") final String route) {
+	public JavadocService(@Value("${jdocs.route}") final String route, 
+			@Value("${jdocs.repository.type:#{null}}") final String repository,
+			@Value("${jdocs.repository.group:#{null}}") final String group,
+			@Value("${jdocs.doc.path:#{null}}") final String docPath) {
 		this.route = route;
-		this.docs = new JavaDocMap();
+		this.docs = new JavaDocMap(docPath, repository, docPath);
 	}
 
 	public JavaDocMap getDocs() {

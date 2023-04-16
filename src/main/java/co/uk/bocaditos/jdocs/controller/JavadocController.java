@@ -32,7 +32,7 @@ public class JavadocController {
     	logger.debug("Setting up home page...");
         model.addAttribute("route", this.service.getRoute());
         model.addAttribute("docs", this.service.getDocs());
-    	logger.debug("Home page was successfuly set up");
+    	logger.debug("Home page was successfully set up");
 
         return "home";
     }
@@ -51,7 +51,7 @@ public class JavadocController {
             model.addAttribute("route", this.service.getRoute());
     		url = "lib";
     	}
-    	logger.debug("{}{} lib page was successfuly set up", name, notNull(version) ? " v" + version : "");
+    	logger.debug("{}{} lib page was successfully set up", name, notNull(version) ? " v" + version : "");
 
     	return url;
     }

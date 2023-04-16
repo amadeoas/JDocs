@@ -13,7 +13,7 @@ public class JavaDocMapTest {
 
 	@Test
 	public void test() {
-		final JavaDocMap docs = new JavaDocMap();
+		final JavaDocMap docs = new JavaDocMap(null, null, null);
 
 		assertNotEquals(0, docs.size());
 	}
