@@ -28,12 +28,37 @@ public class JavaDocMap extends TreeMap<JavaDocMap.StringName, Set<String>> {
 	private static final Logger logger = LogManager.getLogger(JavaDocMap.class);
 	
 	private final String docPath;
-	private final String repository;
-	private final String group;
+	private final RepoInfo repoInfo;
+
+
+	public class RepoInfo {
+
+		private final String type;
+		private final String groupId;
+
+
+		public RepoInfo(final String repoType, final String groupId) {
+			this.type = repoType;
+			this.groupId = groupId;
+		}
+
+		public String getType() {
+			return type;
+		}
+
+		public String getGroupId() {
+			return groupId;
+		}
+		
+		public final boolean isGradle() {
+			return "gradle".equals(type);
+		}
+
+	} // end class RepoInfo
 
 
 	/**
-	 * Whapper of the name of the name of the library with extra functionality.
+	 * Wrapper of the name of the name of the library with extra functionality.
 	 * 
 	 * @author aasco
 	 */
@@ -58,12 +83,20 @@ public class JavaDocMap extends TreeMap<JavaDocMap.StringName, Set<String>> {
 			return JavaDocMap.this.docPath;
 		}
 		
-		public final String getRepository() {
-			return JavaDocMap.this.repository;
+		public final String getRepoType() {
+			return JavaDocMap.this.repoInfo.getType();
 		}
 
-		public final String getGroup() {
-			return JavaDocMap.this.group;
+		public final String getGroupId() {
+			return JavaDocMap.this.repoInfo.getGroupId();
+		}
+		
+		public final boolean hasRepoInfo() {
+			return JavaDocMap.this.repoInfo != null;
+		}
+		
+		public final boolean isGradle() {
+			return "gradle".equals(JavaDocMap.this.repoInfo.getType());
 		}
 		
 		public final String getApiDoc() {
@@ -151,10 +184,13 @@ public class JavaDocMap extends TreeMap<JavaDocMap.StringName, Set<String>> {
 	} // end class StringName
 
 
-	public JavaDocMap(final String docPath, final String repository, final String group) {
+	public JavaDocMap(final String docPath, final String repoType, final String groupId) {
 		this.docPath = docPath;
-		this.repository = repository;
-		this.group = group;
+		if (repoType == null || groupId == null || !("gradle".equals(repoType) || "maven".equals(repoType))) {
+			this.repoInfo = null;
+		} else {
+			this.repoInfo = new RepoInfo(repoType, groupId);
+		}
 		loadDirs();
 //		final File[] files = getResourceFolderFiles(f -> f.isDirectory(), "./static/javadoc");
 //
@@ -165,6 +201,14 @@ public class JavaDocMap extends TreeMap<JavaDocMap.StringName, Set<String>> {
 
 	public final String getDocPath() {
 		return this.docPath;
+	}
+	
+	public final RepoInfo getRepoInfo() {
+		return this.repoInfo;
+	}
+
+	public final boolean isGradle() {
+		return this.repoInfo.isGradle();
 	}
 	
 	public final Set<String> get(final String name) {

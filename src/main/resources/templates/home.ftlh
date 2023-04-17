@@ -11,7 +11,7 @@
 		<h1>Libraries Javadoc<@buildJDocs /></h1>
 <#list docs as name, versions>
 		<details>
-  			<summary>${name.getTitle()} </a><@buildVersions name=name route=route /><@buildLibDoc name=name /><@buildApiDoc name=name /></summary>
+  			<summary>${name.getTitle()}</a> <@buildVersions name=name route=route /><@buildLibDoc name=name /><@buildApiDoc name=name /></summary>
 			<ul>
     <#list versions as version>
 				<li><a href="${route}/javadoc/${name.getName()}/${version}/index.html">${version}</a> <@buildCopy name=name version=version /></li>
