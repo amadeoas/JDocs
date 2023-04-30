@@ -179,7 +179,7 @@
 					console.log("Updating environment by event with index " + index + "...");
 
 					current.env = index;
-					env.value = envs[index].route;
+//					env.value = envs[index].route;
 
 					const hosts = document.getElementById('host');
 					const route = envs[current.env].route;
