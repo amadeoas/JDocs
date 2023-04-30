@@ -46,28 +46,28 @@
         					<option title="Method: GET" value="0">VOID</option>
         				</select>
         				<button class="info" type="button" style="padding-left: 2px; background-color: #ffffff;"><img id="info" title="Information" src="images/info-icon.png" height="20px" /></button>
-        				<button form="requestForm" type="button" class="button" onclick="send(this)">Send</button>
+        				<button id="send" form="requestForm" type="button" class="button" onclick="send(this)">Send</button>
         			</div>
         			<div>
 						<details id="requestDetails">
   							<summary>Request</summary>
   							<div id="request" class="tabset">
   								<!-- Tab Headers -->
-  								<input type="radio" name="tabset" id="tab-request-header" aria-controls="requestHeader" checked>
-  								<label for="tab-request-header">Headers</label>
+  								<input type="radio" name="tabset" id="tab-request-header" aria-controls="requestHeader" onclick="checkTab(this)" checked>
+  								<label id="lbl-request-header" for="tab-request-header">Headers</label>
   								<!-- Tab Parameters -->
-  								<input type="radio" name="tabset" id="tab-request-params" aria-controls="requestParams">
-  								<label for="tab-request-params">Parameters</label>
+  								<input type="radio" name="tabset" id="tab-request-params" aria-controls="requestParams" onclick="checkTab(this)">
+  								<label id="lbl-request-params" for="tab-request-params">Parameters</label>
   								<!-- Tab Body -->
-  								<input type="radio" name="tabset" id="tab-request-body" aria-controls="requestBody">
-  								<label for="tab-request-body">Body</label>
+  								<input type="radio" name="tabset" id="tab-request-body" aria-controls="requestBody" onclick="checkTab(this)">
+  								<label id="lbl-request-body" for="tab-request-body">Body</label>
   
   								<div class="tab-panels">
-  									<section id="requestHeader" class="tab-panel">
+  									<section id="sec-request-header" class="tab-panel">
   									</section>
-  									<section id="requestParams" class="tab-panel">
+  									<section id="sec-request-params" class="tab-panel">
   									</section>
-  									<section id="requestBody" class="tab-panel">
+  									<section id="sec-request-body" class="tab-panel">
   									</section>
   								</div>
 							</div>
@@ -77,10 +77,10 @@
   							<div id="response" class="tabset">
   								<!-- Tab Headers -->
   								<input type="radio" name="tabset" id="tab-response-header" aria-controls="responseHeader" disabled>
-  								<label for="tab-response-header">Headers</label>
+  								<label id="lbl-response-header" for="tab-response-header">Headers</label>
   								<!-- Tab Body -->
   								<input type="radio" name="tabset" id="tab-response-body" aria-controls="responseBody" disabled>
-  								<label for="tab-response-body">Body</label>
+  								<label id="lbl-response-body" for="tab-response-body">Body</label>
   
   								<div class="tab-panels">
   									<section id="responseHeader" class="tab-panel">
@@ -110,16 +110,37 @@
 					+ '"env": "PROD", "route": "bocaditos.co.uk"'
 				+ '}]');
 			const funcs = JSON.parse('[{' 
-					+ '"func": "customers", "method": "GET",    "info": "Gets the customer.",    "headers": [{"name": "Content-Type", "value": "application/json", "disabled": true}, {"name": "Accept", "value": "application/json", "disabled": true}, {"name": "Authorization", "required": true, "info": "Bearer Java Web Token (JWT)"}, {"name": "User", "pattern": "^[a-zA-Z\d]{1,20}$"}], "params": [], "body": []' 
-				+ '}, {'
-					+ '"func": "customers", "method": "POST",   "info": "Creates the customer.", "headers": [], "params": [], "body": []'
-				+ '}, {'
-					+ '"func": "customers", "method": "PUT",    "info": "Updates the customer.", "headers": [], "params": [], "body": []'
-				+ '}, {'
-					+ '"func": "customers", "method": "PATCH",  "info": "Changes the customer.", "headers": [], "params": [], "body": []'
-				+ '}, {'
-					+ '"func": "customers", "method": "DELETE", "info": "Deletes the customer.", "headers": [], "params": [], "body": []'
-				+ '}]');
+				+ '"func": "customers", "method": "GET", "info": "Gets the customer.", ' 
+					+ '"headers": [' 
+							+ '{"name": "Content-Type", "type": "text", "value": "application/json", "disabled": true}, ' 
+							+ '{"name": "Accept", "type": "text", "value": "application/json", "disabled": true}, ' 
+							+ '{"name": "Authorization", "type": "text", "required": true, "info": "Bearer Java Web Token (JWT)"}, ' 
+							+ '{"name": "User", "type": "text", "pattern": "^[a-zA-Z\d]{1,20}$", "minLength": 1, "maxLength": 20, "error": "Invalid values. Value must be a text between 1 to 20 characters of \'a\' to \'z\' and \'A\' to \'Z\'."}' 
+						+ '], ' 
+					+ '"body": [' 
+							+ '{"name": "Firstname", "type": "text", "required": true, "pattern": "^[a-zA-Z ]{1,20}$", "minLength": 1, "maxLength": 20, "info": "Customer\'s firstname. Value must be a text between 1 to 20 characters of \'a\' to \'z\' and \'A\' to \'Z\'.", "error": "Invalid values. Value must be a text between 1 to 20 characters of \'a\' to \'z\' and \'A\' to \'Z\'."}, ' 
+							+ '{"name": "Surname", "type": "text", "required": true, "pattern": "^[a-zA-Z ]{1,20}$", "minLength": 1, "maxLength": 20, "info": "Customer\'s surname. Value must be a text between 1 to 20 characters of \'a\' to \'z\' and \'A\' to \'Z\'.", "error": "Invalid values. Value must be a text between 1 to 20 characters of \'a\' to \'z\' and \'A\' to \'Z\'."}, '
+							+ '{"name": "Date of birth", "type": "date", "required": true, "info": "Custmer\'s date of birth.", "error": "Invalid date of birth values."}'
+						+ '], ' 
+					+ '"params": [' 
+						+ ']}, {'
+				+ '"func": "customers", "method": "POST", "info": "Creates the customer.", ' 
+					+ '"headers": [], ' 
+					+ '"body": [], ' 
+					+ '"params": []}, {'
+				+ '"func": "customers", "method": "PUT", "info": "Updates the customer.", ' 
+					+ '"headers": [], ' 
+					+ '"body": [], ' 
+					+ '"params": []}, {'
+				+ '"func": "customers", "method": "PATCH", "info": "Changes the customer.", ' 
+					+ '"headers": [], ' 
+					+ '"body": [], ' 
+					+ '"params": []}, {'
+				+ '"func": "customers", "method": "DELETE", "info": "Deletes the customer.", ' 
+					+ '"headers": [], ' 
+					+ '"body": [], ' 
+					+ '"params": []' 
+			+ '}]');
 
 
 			function init() {
@@ -193,42 +214,52 @@
 					console.log("Updating host by event with index " + index + "...");
 
 					const method = document.getElementById('method');
+					let numValidTabs = 0;
 
 					current.func = index;
 					method.value = funcs[index].method;
 					document.getElementById('info').title=funcs[index].info;
 
-					buildRequestHeader();
-					buildRequestParams();
-					buildRequestBody();
-
+					if (buildRequestHeader()) {
+						numValidTabs++;
+					}
+					if (buildRequestParams()) {
+						numValidTabs++;
+					}
+					if (buildRequestBody()) {
+						numValidTabs++;
+					}
+					if (numValidTabs == 3) {
+						// Activate sent button
+						document.getElementById("send").disabled = false;
+					}
 					console.log("Host updated by event with index " + index);
 				}
 			}
 
 			function buildRequestHeader() {
-				buildRequestTab("header", funcs[current.func].headers);
+				return buildRequestTab("header", funcs[current.func].headers);
 			}
 
 			function buildRequestParams() {
-				buildRequestTab("params", funcs[current.func].params);
+				return buildRequestTab("params", funcs[current.func].params);
 			}
 
 			function buildRequestBody() {
-				buildRequestTab("body", funcs[current.func].body);
+				return buildRequestTab("body", funcs[current.func].body);
 			}
 
 			function buildRequestTab(name, viewDatas) {
-				const viewName = "request" + name.charAt(0).toUpperCase() + name.substring(1);
+				const secName = "sec-request-" + name;
 				const tabName = "tab-request-" + name;
-				const section = document.getElementById(viewName);
+				const section = document.getElementById(secName);
 
 				if (section.firstChild) {
-					console.log("Cleaning " + viewName + " request tab view...");
+					console.log("Cleaning " + secName + " request tab view...");
 					while (section.firstChild) {
 						section.removeChild(section.lastChild);
 					}
-					console.log(viewName + " request tab view was cleaned");
+					console.log(secName + " request tab view was cleaned");
 				}
 
 				var input = document.getElementById(tabName);
@@ -236,22 +267,69 @@
 				if (viewDatas.length == 0 && !input.disabled) {
 
 					input.disabled = true;
-					console.log(viewName + " request tab view is disabled");
+					console.log(secName + " request tab view is disabled");
 
 					return;
 				} else {
 					input.disabled = false;
 				}
 
-				console.log("Building " + viewName + " request tab view...");
+				console.log("Building " + secName + " request tab view...");
 				for (var i = 0; i < viewDatas.length; i++) {
-					section.appendChild(buildInput(name, viewDatas[i], i));
+					section.appendChild(buildInput(secName, viewDatas[i], i));
 				}
-				console.log(viewName + " request tab view was built");
+				console.log(secName + " request tab view was built");
+
+				return validTab(secName, false);
 			}
 
+			function validTab(secName, checkAll) {
+				let index = 0;
+				let input;
 
-			function buildInput(name, viewData, index) {
+				while (typeof (input = document.getElementById(secName + "-" + index)) != 'undefined' && input != null) {
+					if (!input.checkValidity()) {
+						// Set header as invalid, i.e. incomplete or error
+						let offset = secName.indexOf("-");
+						const lblName = "lbl" + secName.substring(offset);
+						const lbl = document.getElementById(lblName);
+
+						lbl.className = "invalid";
+						document.getElementById("send").disabled = true;
+
+						return false;
+					}
+					index++;
+				}
+
+				let offset = secName.indexOf("-");
+				const lblName = "lbl" + secName.substring(offset);
+				const lbl = document.getElementById(lblName);
+
+				lbl.className = "";
+				if (checkAll) {
+					const names = ["header", "params", "body"];
+					const baseName = secName.substring(0, secName.indexOf("-", "sec-".length) + 1);
+					let numValidTabs = 1;
+
+					for (var name of names) {
+						const nextSecName = baseName + name;
+
+						if (secName != nextSecName && validTab(nextSecName, false)) {
+							numValidTabs++;
+						}
+					}
+
+					if (numValidTabs == names.length) {
+						// Activate sent button
+						document.getElementById("send").disabled = false;
+					}
+				}
+
+				return true;
+			}
+
+			function buildInput(secName, viewData, index) {
 				console.log("ViewData: {name: " + viewData.name + ", value: " + viewData.value 
 						+ ", placeholder: " + viewData.placeholder 
 						+ ", required: " + viewData.required
@@ -271,7 +349,7 @@
 				var input = document.createElement('input');
 
 				input.type = 'text';
-				input.id = name + index;
+				input.id = secName + "-" + index;
 				if (typeof viewData.value != 'undefined') {
 					input.value = viewData.value;
 					console.log("Value was set for " + viewData.name);
@@ -295,25 +373,97 @@
 				if (typeof viewData.pattern != 'undefined') {
 					input.pattern = viewData.pattern;
 				}
+				if (typeof viewData.minLength != 'undefined') {
+					input.minLength = viewData.minLength;
+				}
+				if (typeof viewData.maxLength != 'undefined') {
+					input.maxLength = viewData.maxLength;
+				}
+				if (typeof viewData.min != 'undefined') {
+					input.min = viewData.min;
+				}
+				if (typeof viewData.max != 'undefined') {
+					input.max = viewData.max;
+				}
+				if (typeof viewData.error != 'undefined') {
+					input.error = viewData.error;
+				}
+				if (typeof viewData.placeholder != 'undefined') {
+					input.placeholder = viewData.placeholder;
+				}
+				if (typeof viewData.type != 'undefined') {
+					input.type = viewData.type;
+				}
+				if (typeof viewData.disabled == 'undefined' || !viewData.disabled) {
+					input.addEventListener('input', setCustomValidity, true);
+				}
 				div.appendChild(input);
 
+				let info;
+
 				if (typeof viewData.info != 'undefined') {
-					var info = document.createElement('button');
+					info = viewData.info;
+				} else if (viewData.type != 'hidden' 
+						&& (typeof viewData.disabled == 'undefined' 
+							|| !viewData.disabled)) {
+					let length = 0;
 
-					info.className = "info";
-					info.type = "button";
-
-					var img = document.createElement('img');
-
-					img.src = "images/info-icon.png";
-					img.height = 20;
-					img.title = viewData.info;
-					info.appendChild(img);
-
-					div.appendChild(info);
+					if (typeof viewData.placeholder != 'undefined') {
+						info = viewData.placeholder + "\n";
+						length = info.length;
+					}
+					if (typeof viewData.type != 'undefined') {
+						info = concatenate(info, length, "Type", viewData.type);
+					}
+					if (typeof viewData.minLength != 'undefined') {
+						info = concatenate(info, length, "Min-Length", viewData.minLength);
+					}
+					if (typeof viewData.maxLength != 'undefined') {
+						info = concatenate(info, length, "Max-Length", viewData.maxLength);
+					}
+					if (typeof viewData.min != 'undefined') {
+						info = concatenate(info, length, "Min", viewData.min);
+					}
+					if (typeof viewData.max != 'undefined') {
+						info = concatenate(info, length, "Max", viewData.max);
+					}
+					if (typeof viewData.pattern != 'undefined') {
+						info = concatenate(info, length, "Pattern", viewData.pattern);
+					}
 				}
+				addInfo(div, info);
 
 				return div;
+			}
+			
+			function concatenate(txt, length, name, value) {
+				if (typeof txt == 'undefined') {
+					txt = "";
+				} else if (txt.length > length) {
+					txt += ", ";
+				}
+				txt += name + ": '" + value + "'";
+
+				return txt;
+			}
+			
+			function addInfo(div, title) {
+				if (typeof title == 'undefined') {
+					return;
+				}
+
+				var info = document.createElement('button');
+				var img = document.createElement('img');
+
+				info.className = "info";
+				info.type = "button";
+
+				img.src = "images/info-icon.png";
+				img.height = 20;
+				img.title = title;
+				info.appendChild(img);
+
+				div.appendChild(info);
 			}
 
 			function send(form) {
@@ -424,10 +574,11 @@
 				return document.getElementById(name + index).value;
 			}
 
-			function handleClickOnDetails() {
+			function handleClickOnDetails(e) {
   				// Close all details
+/*
   				let detailsOpened = document.querySelectorAll("details[open]");
-
+console.log("Selected tab ID: " + e.currentTarget.id);
   				for (const item of detailsOpened) {
    					// Keep open only details clicked
     				if (this != item) {
@@ -451,6 +602,27 @@ console.log("Input id: " + input.id + ", disabled: " + input.disabled);
 						break;
 					}
 				}
+*/
+			}
+			
+			function checkTab(item) {
+				var parent = item.parentElement;
+				var children = parent.childNodes;
+
+console.log("Item: " + item.id);
+  				for (const child of children) {
+  					if (child.nodeName == "INPUT") {
+						child.checked = child == item;
+  					}
+  				}
+			}
+
+			function setCustomValidity(e) {
+				const input = e.currentTarget;
+				const offset = input.id.lastIndexOf("-");
+				const secName = input.id.substring(0, offset);
+
+				validTab(secName, true);
 			}
 		</script>
 	</body>
