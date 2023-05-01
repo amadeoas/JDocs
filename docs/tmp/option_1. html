@@ -172,6 +172,7 @@
 				detailsElements.forEach(function (item) {
 					item.addEventListener("click", handleClickOnDetails);
 				});
+				openFirstOfDetails();
 			}
 
 			function updateEnv(env) {
@@ -580,34 +581,20 @@
 			}
 
 			function handleClickOnDetails(e) {
-  				// Close all details
-/*
-  				let detailsOpened = document.querySelectorAll("details[open]");
-console.log("Selected tab ID: " + e.currentTarget.id);
-  				for (const item of detailsOpened) {
-   					// Keep open only details clicked
-    				if (this != item) {
-      					item.removeAttribute("open");
-   				 	}
-  				}
+//  				console.log("Tab ID: " + e.currentTarget.id);
+			}
+			
+			function openFirstOfDetails() {
+  				let details = document.querySelectorAll("details[open]");
 
-				// Open first tab
-				const name = this.id.substring(0, this.id.length - "Details".length);
-				const inputs = document.getElementById(name).getElementsByTagName('input');
-
-				console.log("No. inputs: " + inputs.length + ", id: " + this.id + ", name: " + name);
-				for (var i = 0; i < inputs.length; ++i) {
-					const input = inputs[i];
-
-console.log("Input id: " + input.id + ", disabled: " + input.disabled);
-					if (input.disabled == false) {
-						input.checked = true;
-						console.log("Found first tab with content and set to checked");
-
-						break;
-					}
+				if (details.length > 0) {
+					return;
 				}
-*/
+
+				details = document.querySelectorAll("details");
+				if (details.length > 0) {
+					details[0].setAttribute("open", true);
+				}
 			}
 			
 			function checkTab(item) {
