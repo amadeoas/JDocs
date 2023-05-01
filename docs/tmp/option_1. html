@@ -276,10 +276,13 @@
 					input.disabled = false;
 				}
 
+				var table = document.createElement('table');
+
 				console.log("Building " + secName + " request tab view...");
 				for (var i = 0; i < viewDatas.length; i++) {
-					section.appendChild(buildInput(secName, viewDatas[i], i));
+					table.appendChild(buildInput(secName, viewDatas[i], i));
 				}
+				section.appendChild(table);
 				console.log(secName + " request tab view was built");
 
 				return validTab(secName, false);
@@ -336,19 +339,19 @@
 						+ ", required: " + viewData.required
 						+ ", readOnly: " + viewData.readOnly);
 
-				var div = document.createElement('div');
+				var div = document.createElement('tr');
+				var cell = document.createElement('td');
 				var label = document.createElement('label');
 				var span = document.createElement('span');
 
-				label.innerHTML = viewData.name;
+				label.innerHTML = viewData.name + ":";
 				div.className = "header-field";
-				div.appendChild(label);
-				
-				span.innerHTML = ":";
-				div.appendChild(span);
+				cell.appendChild(label);
+				div.appendChild(cell);
 
 				var input = document.createElement('input');
 
+				cell = document.createElement('td');
 				input.type = 'text';
 				input.id = secName + "-" + index;
 				if (typeof viewData.value != 'undefined') {
@@ -398,7 +401,7 @@
 				if (typeof viewData.disabled == 'undefined' || !viewData.disabled) {
 					input.addEventListener('input', setCustomValidity, true);
 				}
-				div.appendChild(input);
+				cell.appendChild(input);
 
 				let info;
 
@@ -432,7 +435,8 @@
 						info = concatenate(info, length, "Pattern", viewData.pattern);
 					}
 				}
-				addInfo(div, info);
+				addInfo(cell, info);
+				div.appendChild(cell);
 
 				return div;
 			}
@@ -610,7 +614,6 @@ console.log("Input id: " + input.id + ", disabled: " + input.disabled);
 				var parent = item.parentElement;
 				var children = parent.childNodes;
 
-console.log("Item: " + item.id);
   				for (const child of children) {
   					if (child.nodeName == "INPUT") {
 						child.checked = child == item;

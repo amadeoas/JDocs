@@ -269,22 +269,14 @@ button[disabled] {
 	cursor: pointer;
 }
 
-.header-label {
-
-}
-
-.header-field > label {
+.header-field > td label {
 	margin-left: 1px;
 }
 
-.header-field > span {
-	margin-right: 4px;
-}
-
-.header-field > input:invalid {
+.header-field > td input:invalid {
 	box-shadow: 1px 1px 1px red;
 }
-.header-field > input:valid {
+.header-field > td input:valid {
 	border-right: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
 }
