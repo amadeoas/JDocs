@@ -39,14 +39,14 @@
         			</div>
         		</div>
         		<div id="contentBody">
-        			<form id="requestForm" action="return send(this)">
+        			<form id="requestForm" action="return sendForm();">
         			<div id="hostView" style="display: flex;">
         				<input value="GET" type="text" id="method" style="width: 3.5em;" disabled /><span style="margin-top: .4em; margin-right: .1em">:</span>
         				<select name="host" id="host" onchange="updateHost(this)" style="border-bottom: 1px solid #c0c0c0; border-right: 1px solid #c0c0c0; background-color: #ffffff;">
         					<option title="Method: GET" value="0">VOID</option>
         				</select>
         				<button class="info" type="button" style="padding-left: 2px; background-color: #ffffff;"><img id="info" title="Information" src="images/info-icon.png" height="20px" /></button>
-        				<button id="send" form="requestForm" type="button" class="button" onclick="send(this)"><span>Send</span></button>
+        				<button id="send" form="requestForm" type="button" class="button" onclick="sendForm()"><span>Send</span></button>
         				<button id="clear" form="requestForm" type="button" class="button" onclick="clearForm(this)"><span>Clear</span></button>
         			</div>
         			<div>
@@ -472,45 +472,9 @@
 				div.appendChild(info);
 			}
 
-			function send(form) {
-				const userAction = async () => {
-  						const response = await fetch(buildUrl(), {
-    					method: funcs[current.func].method,
-    					body: buildBody(), // string or object
-    					headers: buildHeaders()
-  					});
-
-				  	// Open response tab
-				  	// Populate headers tab
-//var req = new XMLHttpRequest();
-//req.open('GET', document.location, false);
-//req.send(null);
-//var headers = req.getAllResponseHeaders().toLowerCase();
-					
-				  	// Populate body tab
-				  	const body = await response.json(); // extract JSON from the http response
-				  	const bodyView = document.getElementById("responseBody");
-
-					// Empty view
-					while (bodyView.firstChild) {
-						bodyView.removeChild(bodyView.lastChild);
-					}
-
-					// Set view
-					const tab = document.getElementById("tab-response-body");
-
-					if (typeof body != 'undefined') {
-				  		const textArea = document.createElement('textarea');
-
-						textArea.value = JSON.stringify(JSON.parse(body), undefined, 4);
-						bodyView.addChild(textArea);
-
-						tab.disabled = false;
-					} else {
-						// Disable tab
-						tab.disabled = true;
-					}
-				}
+			function sendForm() {
+				// Action from submitting form
+console.log("Form: sendForm()");
 			}
 
 			function buildUrl() {

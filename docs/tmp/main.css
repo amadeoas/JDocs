@@ -170,7 +170,6 @@ button span {
 	border-radius: 4px;
 	background: #87CEFA;
 	cursor: pointer;
-/*    float: right; */
 }
 
 #contentHead {
@@ -276,13 +275,16 @@ button span {
 .header-field > td label {
 	margin-left: 1px;
 }
-
-.header-field > td input:invalid {
-	box-shadow: 1px 1px 1px red;
-}
 .header-field > td input:valid {
 	border-right: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
+}
+.header-field > td input:invalid {
+	box-shadow: 1px 1px 1px red;
+}
+.header-field > td input:focus {
+	border-left: 1px solid #00f;
+	border-top: 1px solid #00f;
 }
 
 input:-moz-read-only,
