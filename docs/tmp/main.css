@@ -28,6 +28,10 @@ button[disabled] {
 	cursor: default;
 }
 
+button span {
+	margin: 4px 6px;
+}
+
 .select > select {
 	padding: 2px 2px 2px 2px;
 	border-right: 1px solid #c0c0c0;

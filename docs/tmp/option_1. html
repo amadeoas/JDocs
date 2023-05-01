@@ -46,8 +46,8 @@
         					<option title="Method: GET" value="0">VOID</option>
         				</select>
         				<button class="info" type="button" style="padding-left: 2px; background-color: #ffffff;"><img id="info" title="Information" src="images/info-icon.png" height="20px" /></button>
-        				<button id="send" form="requestForm" type="button" class="button" onclick="send(this)">Send</button>
-        				<button id="clear" form="requestForm" type="button" class="button" onclick="clearForm(this)">Clear</button>
+        				<button id="send" form="requestForm" type="button" class="button" onclick="send(this)"><span>Send</span></button>
+        				<button id="clear" form="requestForm" type="button" class="button" onclick="clearForm(this)"><span>Clear</span></button>
         			</div>
         			<div>
 						<details id="requestDetails">
