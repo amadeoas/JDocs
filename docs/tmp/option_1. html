@@ -47,6 +47,7 @@
         				</select>
         				<button class="info" type="button" style="padding-left: 2px; background-color: #ffffff;"><img id="info" title="Information" src="images/info-icon.png" height="20px" /></button>
         				<button id="send" form="requestForm" type="button" class="button" onclick="send(this)">Send</button>
+        				<button id="clear" form="requestForm" type="button" class="button" onclick="clearForm(this)">Clear</button>
         			</div>
         			<div>
 						<details id="requestDetails">
@@ -97,6 +98,7 @@
     	</div>
 
 		<script>
+			const baseTabNames = ["header", "params", "body"];
 			const current = JSON.parse('{' 
 					+ '"env": -1, "func": -1'
 				+ '}');
@@ -114,13 +116,13 @@
 					+ '"headers": [' 
 							+ '{"name": "Content-Type", "type": "text", "value": "application/json", "disabled": true}, ' 
 							+ '{"name": "Accept", "type": "text", "value": "application/json", "disabled": true}, ' 
-							+ '{"name": "Authorization", "type": "text", "required": true, "info": "Bearer Java Web Token (JWT)"}, ' 
+							+ '{"name": "Authorization", "type": "text", "required": true, "info": "Bearer Java Web Token (JWT). It\'s required."}, ' 
 							+ '{"name": "User", "type": "text", "pattern": "^[a-zA-Z\d]{1,20}$", "minLength": 1, "maxLength": 20, "error": "Invalid values. Value must be a text between 1 to 20 characters of \'a\' to \'z\' and \'A\' to \'Z\'."}' 
 						+ '], ' 
 					+ '"body": [' 
-							+ '{"name": "Firstname", "type": "text", "required": true, "pattern": "^[a-zA-Z ]{1,20}$", "minLength": 1, "maxLength": 20, "info": "Customer\'s firstname. Value must be a text between 1 to 20 characters of \'a\' to \'z\' and \'A\' to \'Z\'.", "error": "Invalid values. Value must be a text between 1 to 20 characters of \'a\' to \'z\' and \'A\' to \'Z\'."}, ' 
-							+ '{"name": "Surname", "type": "text", "required": true, "pattern": "^[a-zA-Z ]{1,20}$", "minLength": 1, "maxLength": 20, "info": "Customer\'s surname. Value must be a text between 1 to 20 characters of \'a\' to \'z\' and \'A\' to \'Z\'.", "error": "Invalid values. Value must be a text between 1 to 20 characters of \'a\' to \'z\' and \'A\' to \'Z\'."}, '
-							+ '{"name": "Date of birth", "type": "date", "required": true, "info": "Custmer\'s date of birth.", "error": "Invalid date of birth values."}'
+							+ '{"name": "Firstname", "type": "text", "required": true, "pattern": "^[a-zA-Z ]{1,20}$", "minLength": 1, "maxLength": 20, "info": "Customer\'s firstname, which it\'s required. Value must be a text between 1 to 20 characters of \'a\' to \'z\' and \'A\' to \'Z\'.", "error": "Invalid values. Value must be a text between 1 to 20 characters of \'a\' to \'z\' and \'A\' to \'Z\'."}, ' 
+							+ '{"name": "Surname", "type": "text", "required": true, "pattern": "^[a-zA-Z ]{1,20}$", "minLength": 1, "maxLength": 20, "info": "Customer\'s surname, which it\'s required. Value must be a text between 1 to 20 characters of \'a\' to \'z\' and \'A\' to \'Z\'.", "error": "Invalid values. Value must be a text between 1 to 20 characters of \'a\' to \'z\' and \'A\' to \'Z\'."}, '
+							+ '{"name": "Date of birth", "type": "date", "required": true, "info": "Custmer\'s date of birth, which it\'s required.", "error": "Invalid date of birth values."}'
 						+ '], ' 
 					+ '"params": [' 
 						+ ']}, {'
@@ -308,11 +310,10 @@
 
 				lbl.className = "";
 				if (checkAll) {
-					const names = ["header", "params", "body"];
 					const baseName = secName.substring(0, secName.indexOf("-", "sec-".length) + 1);
 					let numValidTabs = 1;
 
-					for (var name of names) {
+					for (var name of baseTabNames) {
 						const nextSecName = baseName + name;
 
 						if (secName != nextSecName && validTab(nextSecName, false)) {
@@ -320,7 +321,7 @@
 						}
 					}
 
-					if (numValidTabs == names.length) {
+					if (numValidTabs == baseTabNames.length) {
 						// Activate sent button
 						document.getElementById("send").disabled = false;
 					}
@@ -623,6 +624,25 @@ console.log("Item: " + item.id);
 				const secName = input.id.substring(0, offset);
 
 				validTab(secName, true);
+			}
+
+			function clearForm(e) {
+				for (var name of baseTabNames) {
+					const secName = "sec-request-" + name;
+					let index = 0;
+
+					while (typeof (input = document.getElementById(secName + "-" + index)) != 'undefined' 
+							&& input != null) {
+						if (!input.disabled) {
+							input.value = "";
+							if (input.required) {
+								document.getElementById("lbl" + secName.substring("sec".length)).className = "invalid";
+								document.getElementById("send").disabled = true;
+							}
+						}
+						index++;
+					}
+				}
 			}
 		</script>
 	</body>
